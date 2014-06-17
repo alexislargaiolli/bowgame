@@ -3,8 +3,10 @@ package fr.alex.games;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -21,6 +23,7 @@ public class GameScreen implements Screen, InputProcessor{
 	
 	private Level level;
 	private Bow bow;
+	private Player player;
 	
 	public GameScreen(){
 		camera = new OrthographicCamera();
@@ -32,6 +35,8 @@ public class GameScreen implements Screen, InputProcessor{
 		level = new Level();
 		debugRenderer = new Box2DDebugRenderer();
 		bow = new Bow(new Vector2(60 * WORLD_TO_BOX, 20 * WORLD_TO_BOX));
+		player = new Player(40 * WORLD_TO_BOX , 40 * WORLD_TO_BOX);
+		player.setBow(bow);
 	}
 	
 	@Override
@@ -41,7 +46,10 @@ public class GameScreen implements Screen, InputProcessor{
 	}
 	
 	private void update(float delta){
+		camera.position.set(player.getBody().getPosition().x, Gdx.graphics.getHeight() * WORLD_TO_BOX * .5f, 0f);
+		camera.update();
 		Game.world.step(BOX_STEP, BOX_VELOCITY_ITERATIONS, BOX_POSITION_ITERATIONS);
+		player.update(delta);
 	}
 	
 	private void draw(){
@@ -91,7 +99,9 @@ public class GameScreen implements Screen, InputProcessor{
 
 	@Override
 	public boolean keyUp(int keycode) {
-		// TODO Auto-generated method stub
+		if(keycode == Keys.SPACE){
+			player.jump();
+		}
 		return false;
 	}
 
@@ -108,8 +118,9 @@ public class GameScreen implements Screen, InputProcessor{
 	}
 
 	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		bow.fire(new Vector2(screenX  * GameScreen.WORLD_TO_BOX , Gdx.graphics.getHeight()  * GameScreen.WORLD_TO_BOX - screenY  * GameScreen.WORLD_TO_BOX));
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {		
+		Vector3 p = camera.unproject(new Vector3(screenX, screenY, 0));
+		bow.fire(new Vector2(p.x , p.y));
 		return false;
 	}
 

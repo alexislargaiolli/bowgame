@@ -13,5 +13,13 @@ public class Bow {
 	public void fire(Vector2 dest){
 		Arrow a = new Arrow(origin, dest, 5);
 	}
+
+	public Vector2 getOrigin() {
+		return origin;
+	}
+
+	public void setOrigin(Vector2 origin) {
+		this.origin = origin;
+	}
 	
 }

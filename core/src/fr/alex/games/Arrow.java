@@ -24,6 +24,12 @@ public class Arrow {
 		
 		shape = new PolygonShape();
 		shape.setAsBox(10  * GameScreen.WORLD_TO_BOX, 2 * GameScreen.WORLD_TO_BOX, new Vector2(5 * GameScreen.WORLD_TO_BOX, 1 * GameScreen.WORLD_TO_BOX), direction.angleRad());
+		/*float[] vertices = new float[]{0, 1, 0, 3, 8, 3, 10, 4, 10, 0, 8, 1};
+		for(int i=0; i< vertices.length; ++i){
+			vertices[i] *= GameScreen.WORLD_TO_BOX;					
+		}
+		shape.set(vertices);*/
+		
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
 		fixtureDef.density = 1f;
