@@ -2,11 +2,13 @@ package fr.alex.games.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import fr.alex.games.BowGame;
+import fr.alex.games.Main;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		new LwjglApplication(new BowGame(), config);
+		config.width = 800;
+		config.height = 400;
+		new LwjglApplication(new Main(), config);
 	}
 }

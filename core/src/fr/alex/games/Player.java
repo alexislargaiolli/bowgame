@@ -19,19 +19,19 @@ public class Player {
 		BodyDef bodyDef = new BodyDef();
 		bodyDef.type = BodyType.DynamicBody;
 		bodyDef.position.set(new Vector2(x, y));
-		body = Game.world.createBody(bodyDef);
+		body = BowGame.world.createBody(bodyDef);
 		
 		shape = new PolygonShape();
-		shape.setAsBox(10 * GameScreen.WORLD_TO_BOX, 40 * GameScreen.WORLD_TO_BOX);
+		shape.setAsBox(10 * BowGame.WORLD_TO_BOX, 40 * BowGame.WORLD_TO_BOX);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = shape;
-		fixtureDef.density = 1f;
-		fixtureDef.restitution = .5f;
-		fixtureDef.friction = .5f;
+		fixtureDef.density = .5f;
+		fixtureDef.restitution = .2f;
+		fixtureDef.friction = .1f;
 		Fixture fixture = body.createFixture(fixtureDef);
 		fixture.setUserData(this);
 		body.setFixedRotation(true);
-		jumpVector = new Vector2(0, 30);
+		jumpVector = new Vector2(0, 15);
 		
 	}
 	

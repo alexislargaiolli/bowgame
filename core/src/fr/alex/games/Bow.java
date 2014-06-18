@@ -10,8 +10,10 @@ public class Bow {
 		this.origin = origin;
 	}
 	
-	public void fire(Vector2 dest){
-		Arrow a = new Arrow(origin, dest, 5);
+	public void fire(Vector2 direction){
+		float speed = 5;		
+		Arrow arrow = BowGame.arrowManager.create(origin, direction);
+		arrow.getBody().applyForceToCenter(new Vector2(direction.x, direction.y).scl(speed), true);
 	}
 
 	public Vector2 getOrigin() {
