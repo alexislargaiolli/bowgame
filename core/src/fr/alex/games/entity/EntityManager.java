@@ -3,6 +3,8 @@ package fr.alex.games.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public abstract class EntityManager<T extends Entity> {
 	
 	protected List<T> entities;
@@ -28,6 +30,12 @@ public abstract class EntityManager<T extends Entity> {
 			removedEntity(e);
 		}
 		entitiesToRemove.clear();
+	}
+	
+	public void draw(SpriteBatch batch){
+		for(int i= 0; i < entities.size(); ++i){
+			entities.get(i).draw(batch);
+		}
 	}
 	
 	protected abstract void updateEntity(float delta, Entity e);

@@ -16,12 +16,25 @@ public class Bow {
 		arrow.getBody().applyForceToCenter(new Vector2(direction.x, direction.y).scl(speed), true);
 	}
 
-	public Vector2 getOrigin() {
-		return origin;
+	public void setOrigin(float x, float y) {
+		this.origin.x = x;
+		this.origin.y = y;
 	}
-
-	public void setOrigin(Vector2 origin) {
-		this.origin = origin;
+	
+	public float getWorldOriginX(){
+		return this.origin.x;
+	}
+	
+	public float getWorldOriginY(){
+		return this.origin.y;
+	}
+	
+	public float getBoxOriginX(){
+		return Utils.toBox(this.origin.x);
+	}
+	
+	public float getBoxOriginY(){
+		return Utils.toBox(this.origin.y);
 	}
 	
 }

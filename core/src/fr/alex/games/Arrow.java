@@ -1,13 +1,16 @@
 package fr.alex.games;
 
-import fr.alex.games.entity.Entity;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class Arrow extends Entity{
+import fr.alex.games.entity.RectangleEntity;
+
+public class Arrow extends RectangleEntity{
 	
 	float timeBeforeDeath = -1;
 	
-	public Arrow(){
-		
+	public Arrow(float x, float y, float angle, TextureRegion textureRegion){
+		super(x, y, 20, 4, angle, 1, .5f, .1f, textureRegion);
+		fixture.setUserData(this);
 	}
 	
 	public void update(float delta){

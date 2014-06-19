@@ -10,49 +10,35 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class Level {
 	public Level() {
-		
+
 	}
-	
-	public void init(){
+
+	public void init() {
 		BowGame.world = new World(new Vector2(0, -10), true);
 
 		createWall(0, 50 * BowGame.WORLD_TO_BOX, Gdx.graphics.getWidth() * 20f * BowGame.WORLD_TO_BOX, 5 * BowGame.WORLD_TO_BOX);
 
-		/*
-		 * BodyDef bodyDef = new BodyDef(); bodyDef.type = BodyType.DynamicBody;
-		 * bodyDef.position.set(300 * GameScreen.WORLD_TO_BOX, 100 *
-		 * GameScreen.WORLD_TO_BOX); Body body = Game.world.createBody(bodyDef);
-		 * 
-		 * 
-		 * CircleShape dynamicCircle = new CircleShape();
-		 * dynamicCircle.setRadius(10 * GameScreen.WORLD_TO_BOX); FixtureDef
-		 * fixtureDef = new FixtureDef(); fixtureDef.shape = dynamicCircle;
-		 * fixtureDef.density = 1f; fixtureDef.friction = .5f;
-		 * fixtureDef.restitution = .5f;
-		 * 
-		 * body.createFixture(fixtureDef);
-		 */
-
 		createPyramid(300, 100);
 
-		float x = 600;
+		float x = 100;
 		for (int i = 0; i < 30; ++i) {
 			x += MathUtils.random(200, 400);
-			float width = MathUtils.random(5, 20);
-			float height = MathUtils.random(40, 100);
-			float y = 100;
-			BowGame.blockManager.createBlock(x, y, width * BowGame.WORLD_TO_BOX, height * BowGame.WORLD_TO_BOX);
+			float y = 60;
+			BowGame.blockManager.createSmallBlock(x, y);
+			BowGame.blockManager.createSmallBlock(x, y + 40);
+			BowGame.blockManager.createSmallBlock(x, y + 80);
+			BowGame.blockManager.createSmallBlock(x, y + 120);
 		}
 	}
 
 	private void createPyramid(float x, float baseWidth) {
-		/*float curY = 5, curWidth = baseWidth, height = 10;
-		while (curWidth > baseWidth * .2f) {
-			BowGame.blockManager.createBlock(x, curY, curWidth * BowGame.WORLD_TO_BOX, height * BowGame.WORLD_TO_BOX);
-
-			curY += 40;
-			curWidth -= baseWidth * .2f;
-		}*/
+		/*
+		 * float curY = 5, curWidth = baseWidth, height = 10; while (curWidth >
+		 * baseWidth * .2f) { BowGame.blockManager.createBlock(x, curY, curWidth
+		 * * BowGame.WORLD_TO_BOX, height * BowGame.WORLD_TO_BOX);
+		 * 
+		 * curY += 40; curWidth -= baseWidth * .2f; }
+		 */
 	}
 
 	private void createWall(float x, float y, float width, float height) {

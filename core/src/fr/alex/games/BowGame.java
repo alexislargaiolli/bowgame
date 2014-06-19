@@ -27,7 +27,7 @@ public class BowGame {
 	public static ArrowManager arrowManager;
 	public static BlockManager blockManager;
 	
-	private AssetManager assets;
+	public static AssetManager assets;
 	private OrthographicCamera camera;
 	private Box2DDebugRenderer debugRenderer;
 	private SpriteBatch batch;
@@ -46,19 +46,9 @@ public class BowGame {
 		camera.viewportHeight = Gdx.graphics.getHeight();
 		camera.viewportWidth = Gdx.graphics.getWidth();
 		camera.position.set(Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * .5f, 0f);
-		camera.update();
-		
-		arrowManager = new ArrowManager();
-		blockManager = new BlockManager();
-		
-		level.init();
+		camera.update();				
 			
-		debugRenderer = new Box2DDebugRenderer();
-		bow = new Bow(new Vector2(60 * WORLD_TO_BOX, 20 * WORLD_TO_BOX));
-		player = new Player(40 * WORLD_TO_BOX , 200 * WORLD_TO_BOX);
-		player.setBow(bow);
-		
-		world.setContactListener(new GameCollisions());
+		debugRenderer = new Box2DDebugRenderer();				
 		
 		loadResources();
 		init();
@@ -75,24 +65,31 @@ public class BowGame {
 		assets.load("bg2.png", Texture.class);
 		assets.load("bg3.png", Texture.class);
 		assets.load("bg4.png", Texture.class);
-		assets.load("block.png", Texture.class);
+		assets.load(BlockManager.smallBlockTextureName, Texture.class);
 		while(!assets.update()){}
 		region1 = new TextureRegion(assets.get("bg1.png", Texture.class));
 		region2 = new TextureRegion(assets.get("bg2.png", Texture.class));
 		region3 = new TextureRegion(assets.get("bg3.png", Texture.class));
-		region4 = new TextureRegion(assets.get("bg4.png", Texture.class));
-		
-		blockManager.setTexture(assets.get("block.png", Texture.class));
+		region4 = new TextureRegion(assets.get("bg4.png", Texture.class));		
 	}
 	
 	public void init(){
-		
+		arrowManager = new ArrowManager();
+		blockManager = new BlockManager();
 		background = new ParallaxBackground(new ParallaxLayer[]{
 	            new ParallaxLayer(region1,new Vector2(),new Vector2()),
 	            new ParallaxLayer(region2,new Vector2(0.1f,0f),new Vector2()),
 	            new ParallaxLayer(region3,new Vector2(0.5f,0),new Vector2()),
 	            new ParallaxLayer(region4,new Vector2(1f,0),new Vector2())
 	      }, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),new Vector2(150,0));
+		
+		level.init();
+	
+		world.setContactListener(new GameCollisions());
+		
+		bow = new Bow(new Vector2(60, 20));
+		player = new Player(40 , 200);
+		player.setBow(bow);
 	}
 	
 	public void draw(float delta){
@@ -117,7 +114,7 @@ public class BowGame {
 	}
 	
 	public void onClick(float x, float y){
-		Vector2 direction = new Vector2(Utils.toBox(x), Utils.toBox(y)).sub(bow.getOrigin()).nor();
+		Vector2 direction = new Vector2(x, y).sub(bow.getWorldOriginX(), bow.getWorldOriginY()).nor();
 		bow.fire(direction);
 		if(direction.y < 0 && direction.x > -.5f && direction.x < .5f){
 			player.jump();
