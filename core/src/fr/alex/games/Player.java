@@ -1,5 +1,6 @@
 package fr.alex.games;
 
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 
@@ -9,8 +10,8 @@ public class Player extends RectangleEntity {
 	private Vector2 jumpVector;
 	private Bow bow;
 
-	public Player(float x, float y) {
-		super(x, y, 40, 40, 0, .5f, .2f, .1f, null);
+	public Player(float x, float y, TextureRegion region) {
+		super(x, y, 40, 40, 0, .5f, .2f, .1f, region);
 		body.setUserData(this);
 		body.setFixedRotation(true);
 		jumpVector = new Vector2(0, 15);
@@ -25,7 +26,7 @@ public class Player extends RectangleEntity {
 	}
 
 	public void jump() {
-		body.applyForceToCenter(jumpVector, true);
+		body.applyForceToCenter(jumpVector, true);	
 	}
 
 	public Body getBody() {

@@ -11,7 +11,7 @@ public class Bow {
 	}
 	
 	public void fire(Vector2 direction){
-		float speed = 5;		
+		float speed = 50;		
 		Arrow arrow = BowGame.arrowManager.create(origin, direction);
 		arrow.getBody().applyForceToCenter(new Vector2(direction.x, direction.y).scl(speed), true);
 	}

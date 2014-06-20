@@ -9,7 +9,7 @@ public class Arrow extends RectangleEntity{
 	float timeBeforeDeath = -1;
 	
 	public Arrow(float x, float y, float angle, TextureRegion textureRegion){
-		super(x, y, 20, 4, angle, 1, .5f, .1f, textureRegion);
+		super(x, y, 30, 12, angle, 2f, .8f, .5f, textureRegion);
 		fixture.setUserData(this);
 	}
 	

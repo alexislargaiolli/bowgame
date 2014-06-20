@@ -17,13 +17,14 @@ public class Level {
 		BowGame.world = new World(new Vector2(0, -10), true);
 
 		createWall(0, 50 * BowGame.WORLD_TO_BOX, Gdx.graphics.getWidth() * 20f * BowGame.WORLD_TO_BOX, 5 * BowGame.WORLD_TO_BOX);
-
+		createWall(0, Gdx.graphics.getHeight() * BowGame.WORLD_TO_BOX, Gdx.graphics.getWidth() * 20f * BowGame.WORLD_TO_BOX, 5 * BowGame.WORLD_TO_BOX);
+		
 		createPyramid(300, 100);
 
 		float x = 100;
 		for (int i = 0; i < 30; ++i) {
-			x += MathUtils.random(200, 400);
-			float y = 60;
+			x += MathUtils.random(100, 400);
+			float y = 100;
 			BowGame.blockManager.createSmallBlock(x, y);
 			BowGame.blockManager.createSmallBlock(x, y + 40);
 			BowGame.blockManager.createSmallBlock(x, y + 80);
