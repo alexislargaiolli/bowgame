@@ -2,15 +2,15 @@ package fr.alex.games.entity;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
 import fr.alex.games.BowGame;
 
-public abstract class RectangleEntity extends Entity {
+public abstract class RectangleEntity extends PhysicEntity {
 
 	protected float width, height, angle;
 	protected Fixture fixture;	
@@ -37,6 +37,10 @@ public abstract class RectangleEntity extends Entity {
 	@Override
 	public void draw(SpriteBatch batch) {
 		batch.draw(textureRegion, getWorldX() - getWorldWidth() * .5f, getWorldY() - getWorldHeight() *.5f, getWorldWidth() * .5f, getWorldHeight() *.5f, getWorldWidth(), getWorldHeight(), 1f, 1f, MathUtils.radiansToDegrees * body.getAngle());
+	}
+	
+	public void debug(ShapeRenderer debug){
+		
 	}
 
 	public float getWorldWidth() {

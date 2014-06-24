@@ -6,6 +6,8 @@ import com.badlogic.gdx.physics.box2d.ContactListener;
 import com.badlogic.gdx.physics.box2d.Manifold;
 
 import fr.alex.games.entity.Block;
+import fr.alex.games.entity.BonusEntity;
+import fr.alex.games.entity.Coin;
 
 public class GameCollisions implements ContactListener {
 
@@ -30,6 +32,12 @@ public class GameCollisions implements ContactListener {
 		else if(other instanceof Block){
 			arrowContactBlock(arrow, (Block) other);
 		}
+		else if(other instanceof BonusEntity){
+			arrowContactBonus(arrow, (BonusEntity) other);
+		}
+		else if(other instanceof Coin){
+			arrowContactCoin(arrow, (Coin) other);
+		}
 	}
 
 	private void arrowContactArrow(Arrow arrow1, Arrow arrow2) {
@@ -38,6 +46,15 @@ public class GameCollisions implements ContactListener {
 	
 	private void arrowContactBlock(Arrow arrow1, Block block) {
 		
+	}
+	
+	private void arrowContactBonus(Arrow arrow1, BonusEntity bonus) {
+		bonus.setDead(true);
+		GM.bonusManager.create(bonus.getBonusType());
+	}
+	
+	private void arrowContactCoin(Arrow arrow1, Coin coin) {
+		coin.setDead(true);
 	}
 
 	@Override

@@ -3,7 +3,8 @@ package fr.alex.games.client;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.backends.gwt.GwtApplication;
 import com.badlogic.gdx.backends.gwt.GwtApplicationConfiguration;
-import fr.alex.games.Main;
+
+import fr.alex.games.screens.Main;
 
 public class HtmlLauncher extends GwtApplication {
 

@@ -1,26 +1,22 @@
-package fr.alex.games;
+package fr.alex.games.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
 
-public class GameScreen implements Screen, InputProcessor{	
-	
-	private OrthographicCamera camera; 
-	private BowGame game;
+import fr.alex.games.GM;
+
+public class GameScreen implements Screen, InputProcessor{
 	
 	public GameScreen(){
-		Level level = new Level();
-		camera = new OrthographicCamera();
-		game = new BowGame(level, camera);
+		
 	}
 	
 	@Override
 	public void render(float delta) {
-		game.update(delta);
-		game.draw(delta);
+		GM.bowGame.update(delta);
+		GM.bowGame.draw(delta);
 	}
 	
 	@Override
@@ -60,7 +56,7 @@ public class GameScreen implements Screen, InputProcessor{
 
 	@Override
 	public boolean keyUp(int keycode) {
-		game.onKeyUp(keycode);
+		GM.bowGame.onKeyUp(keycode);
 		return false;
 	}
 
@@ -76,8 +72,8 @@ public class GameScreen implements Screen, InputProcessor{
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {		
-		Vector3 p = camera.unproject(new Vector3(screenX, screenY, 0));
-		game.onClick(p.x, p.y);
+		Vector3 p = GM.bowGame.getCamera().unproject(new Vector3(screenX, screenY, 0));
+		GM.bowGame.onClick(p.x, p.y);
 		return false;
 	}
 

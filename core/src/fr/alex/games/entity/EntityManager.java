@@ -38,8 +38,13 @@ public abstract class EntityManager<T extends Entity> {
 		}
 	}
 	
-	protected abstract void updateEntity(float delta, Entity e);
+	public void clear(){
+		entities.clear();
+		entitiesToRemove.clear();
+	}
 	
-	protected abstract void removedEntity(Entity e);
+	protected abstract void updateEntity(float delta, T e);
+	
+	protected abstract void removedEntity(T e);
 	
 }
