@@ -26,7 +26,7 @@ public class LoadingScreen implements Screen{
 			batch.end();
 			if(Gdx.input.isTouched()){
 				GM.bowGame.init();
-				ScreenManager.getInstance().show(fr.alex.games.screens.Screen.GAME);
+				ScreenManager.getInstance().show(fr.alex.games.screens.Screens.GAME);
 			}
 		}
 		else{

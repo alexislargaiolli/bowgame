@@ -10,6 +10,7 @@ import fr.alex.games.entity.BlockManager;
 import fr.alex.games.entity.BonusEntityManager;
 import fr.alex.games.entity.CoinManager;
 import fr.alex.games.entity.bonus.BonusManager;
+import fr.alex.games.json.JsonLevel;
 
 public class GM {
 	public static AssetManager assetManager;
@@ -26,4 +27,5 @@ public class GM {
 	public static BowGame bowGame;
 	public static int score;
 	public static ParticleEffectPool effectPool;
+	public static JsonLevel currentEditedLevel;
 }

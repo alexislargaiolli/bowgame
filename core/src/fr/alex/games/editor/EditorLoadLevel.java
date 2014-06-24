@@ -1,45 +1,45 @@
-package fr.alex.games.screens;
+package fr.alex.games.editor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.List;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Json;
 
 import fr.alex.games.GM;
+import fr.alex.games.json.JsonLevel;
+import fr.alex.games.screens.ScreenManager;
+import fr.alex.games.screens.Screens;
 
-public class MainMenuScreen implements Screen{
+public class EditorLoadLevel implements Screen {
 
-	private Stage stage;
+	Stage stage;
 	
-	public MainMenuScreen(){
+	public EditorLoadLevel(){
 		stage = new Stage();
-		TextButton bt = new TextButton("play", GM.skin);
-		bt.setPosition(200, 200);
-		bt.addListener(new ClickListener(){
-
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				ScreenManager.getInstance().show(fr.alex.games.screens.Screens.LOADING);
-				super.clicked(event, x, y);
-			}
-			
-		});
-		stage.addActor(bt);
+		final List<FileHandle> list = new List<FileHandle>(GM.skin);
+		list.setItems(Gdx.files.external("editor/levels").list());
+		stage.addActor(list);
 		
-		bt = new TextButton("Editor", GM.skin);
-		bt.setPosition(200, 160);
+		TextButton bt = new TextButton("Load", GM.skin);
 		bt.addListener(new ClickListener(){
 
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				ScreenManager.getInstance().show(fr.alex.games.screens.Screens.EDITOR_MENU);
+				FileHandle levelFile = list.getSelected();
+				if(levelFile != null){
+					Json json = new Json();
+					GM.currentEditedLevel = json.fromJson(JsonLevel.class, levelFile);
+					ScreenManager.getInstance().show(Screens.EDITOR);
+				}
 				super.clicked(event, x, y);
 			}
 			
 		});
-		stage.addActor(bt);
 	}
 	
 	@Override

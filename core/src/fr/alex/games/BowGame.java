@@ -89,7 +89,7 @@ public class BowGame {
 		GM.bonusEntityManager.clear();
 		GM.bonusManager.clear();
 		GM.coinManager.clear();
-		GM.currentLevel.init();
+		GM.currentLevel.init(Gdx.files.internal("levels/test"));
 		GM.score = 0;
 
 		camera.position.set(Gdx.graphics.getWidth() * 0.3f, Gdx.graphics.getHeight() * .5f, 0f);
@@ -166,7 +166,7 @@ public class BowGame {
 			if (counter > 2) {
 				lbInfo.setText("Click to continue");
 				if (Gdx.input.isTouched()) {
-					ScreenManager.getInstance().show(fr.alex.games.screens.Screen.SCORE);
+					ScreenManager.getInstance().show(fr.alex.games.screens.Screens.SCORE);
 				}
 			}
 		}

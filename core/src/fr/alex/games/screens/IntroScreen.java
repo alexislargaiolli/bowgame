@@ -6,7 +6,7 @@ public class IntroScreen implements Screen{
 
 	@Override
 	public void render(float delta) {
-		ScreenManager.getInstance().show(fr.alex.games.screens.Screen.MAIN_MENU);
+		ScreenManager.getInstance().show(fr.alex.games.screens.Screens.MAIN_MENU);
 	}
 
 	@Override

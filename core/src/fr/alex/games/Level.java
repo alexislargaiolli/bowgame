@@ -3,6 +3,7 @@ package fr.alex.games;
 import java.util.HashMap;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
@@ -16,6 +17,9 @@ import com.badlogic.gdx.utils.Json;
 import fr.alex.games.background.ParallaxBackground;
 import fr.alex.games.background.ParallaxLayer;
 import fr.alex.games.entity.bonus.BonusType;
+import fr.alex.games.json.JsonBonusEntity;
+import fr.alex.games.json.JsonCircleEntity;
+import fr.alex.games.json.JsonEntity;
 import fr.alex.games.json.JsonLevel;
 import fr.alex.games.json.JsonRectangleEntity;
 
@@ -30,8 +34,8 @@ public class Level {
 		textures.put("bonus.png", null);
 		textures.put("coin.png", null);
 		width = Gdx.graphics.getWidth() * 2f;
-	}	
-
+	}
+	
 	public void loadRessources(){
 		for(String texture : textures.keySet()){
 			GM.assetManager.load(texture, Texture.class);
@@ -46,6 +50,42 @@ public class Level {
 		for(String texture : textures.keySet()){
 			textures.get(texture).getTexture().dispose();
 		}
+	}
+	
+	public void init(FileHandle file) {
+		for(String texture : textures.keySet()){
+			TextureRegion region = new TextureRegion(GM.assetManager.get(texture, Texture.class));
+			textures.put(texture, region);
+		}
+		
+		GM.world = new World(new Vector2(0, -10), true);
+		GM.world.setContactListener(new GameCollisions());
+		
+		Json json = new Json();
+		JsonLevel lvl = json.fromJson(JsonLevel.class, file);
+		
+		this.createWall(Utils.toBox(lvl.width*.5f), Utils.toBox(50), Utils.toBox(lvl.width), Utils.toBox(5));
+		this.createWall(Utils.toBox(lvl.width*.5f), Utils.toBox(Gdx.graphics.getHeight()), Utils.toBox(lvl.width), Utils.toBox(5));
+		
+		for(JsonEntity e : lvl.entities){
+			if(e instanceof JsonRectangleEntity){
+				GM.blockManager.createSmallBlock(e.x, e.y, textures.get("block2.png"));
+			}
+			else if(e instanceof JsonBonusEntity){
+				JsonBonusEntity jb = (JsonBonusEntity) e;
+				GM.bonusEntityManager.create(jb.x, jb.y, textures.get("bonus.png"), jb.bonus);
+			}
+			else if(e instanceof JsonCircleEntity){
+				GM.coinManager.create(e.x, e.y, textures.get("coin.png"));
+			}
+		}
+		
+		TextureRegion region1 = new TextureRegion(GM.assetManager.get("bg1.png", Texture.class));
+		TextureRegion region2 = new TextureRegion(GM.assetManager.get("bg2.png", Texture.class));
+		TextureRegion region3 = new TextureRegion(GM.assetManager.get("bg3.png", Texture.class));
+		TextureRegion region4 = new TextureRegion(GM.assetManager.get("bg4.png", Texture.class));
+		
+		background = new ParallaxBackground(new ParallaxLayer[] { new ParallaxLayer(region1, new Vector2(), new Vector2()), new ParallaxLayer(region2, new Vector2(0.1f, 0f), new Vector2()), new ParallaxLayer(region3, new Vector2(0.5f, 0), new Vector2()), new ParallaxLayer(region4, new Vector2(1f, 0), new Vector2()) }, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new Vector2(150, 0));
 	}
 	
 	public void init() {

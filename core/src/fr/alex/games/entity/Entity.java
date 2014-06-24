@@ -2,6 +2,8 @@ package fr.alex.games.entity;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import fr.alex.games.json.JsonEntity;
+
 public abstract class Entity {
 	protected boolean dead;	
 	
@@ -16,4 +18,6 @@ public abstract class Entity {
 	public void setDead(boolean dead) {
 		this.dead = dead;
 	}
+	
+	public abstract JsonEntity toJsonEntity();
 }

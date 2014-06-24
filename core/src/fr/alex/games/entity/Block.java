@@ -2,6 +2,8 @@ package fr.alex.games.entity;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import fr.alex.games.json.JsonRectangleEntity;
+
 public class Block extends RectangleEntity{
 
 	public Block(float x, float y, float width, float height, TextureRegion textureRegion) {
@@ -13,6 +15,13 @@ public class Block extends RectangleEntity{
 	public void update(float delta) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public JsonRectangleEntity toJsonEntity() {
+		JsonRectangleEntity e = super.toJsonEntity();
+		e.type = "block";
+		return e;
 	}
 	
 }

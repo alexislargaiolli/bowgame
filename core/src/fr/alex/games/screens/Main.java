@@ -36,7 +36,7 @@ public class Main extends Game {
 		
 		
 		ScreenManager.getInstance().initialize(this);
-		ScreenManager.getInstance().show(Screen.INTRO);
+		ScreenManager.getInstance().show(Screens.INTRO);
 	}
 
 	@Override

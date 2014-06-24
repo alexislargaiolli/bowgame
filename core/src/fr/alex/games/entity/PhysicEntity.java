@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 
 import fr.alex.games.GM;
 import fr.alex.games.Utils;
+import fr.alex.games.json.JsonEntity;
 
 public abstract class PhysicEntity extends Entity{
 	protected Body body;
@@ -50,4 +51,6 @@ public abstract class PhysicEntity extends Entity{
 		this.body = body;
 	}
 
+	
+	
 }

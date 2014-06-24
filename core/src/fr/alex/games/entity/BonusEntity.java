@@ -3,7 +3,9 @@ package fr.alex.games.entity;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
+import fr.alex.games.Utils;
 import fr.alex.games.entity.bonus.BonusType;
+import fr.alex.games.json.JsonBonusEntity;
 
 public class BonusEntity extends CircleEntity {
 
@@ -29,6 +31,19 @@ public class BonusEntity extends CircleEntity {
 
 	public void setBonusType(BonusType bonusType) {
 		this.bonusType = bonusType;
+	}
+	
+	public JsonBonusEntity toJsonEntity() {
+		JsonBonusEntity e = new JsonBonusEntity();
+		e.x = Utils.toWorld(body.getPosition().x);
+		e.y = Utils.toWorld(body.getPosition().y);				
+		e.density = fixture.getDensity();
+		e.friction = fixture.getFriction();
+		e.resitution = fixture.getRestitution();
+		e.radius = radius;
+		e.bonus = bonusType;
+		e.type = "bonus";
+		return e;
 	}
 
 }

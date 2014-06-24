@@ -28,7 +28,7 @@ public class ScoreScreen implements Screen {
 				GM.currentLevel.loadRessources();
 				GM.bowGame.loadResources();
 				GM.bowGame.init();
-				ScreenManager.getInstance().show(fr.alex.games.screens.Screen.LOADING);				
+				ScreenManager.getInstance().show(fr.alex.games.screens.Screens.LOADING);				
 				super.clicked(event, x, y);
 			}
 

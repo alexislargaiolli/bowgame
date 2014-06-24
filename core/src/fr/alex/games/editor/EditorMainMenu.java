@@ -1,4 +1,4 @@
-package fr.alex.games.screens;
+package fr.alex.games.editor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -8,37 +8,39 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 import fr.alex.games.GM;
+import fr.alex.games.screens.ScreenManager;
+import fr.alex.games.screens.Screens;
 
-public class MainMenuScreen implements Screen{
-
-	private Stage stage;
+public class EditorMainMenu implements Screen {
 	
-	public MainMenuScreen(){
+	Stage stage;
+
+	public EditorMainMenu(){
 		stage = new Stage();
-		TextButton bt = new TextButton("play", GM.skin);
-		bt.setPosition(200, 200);
+		TextButton bt = new TextButton("New level", GM.skin);
 		bt.addListener(new ClickListener(){
 
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				ScreenManager.getInstance().show(fr.alex.games.screens.Screens.LOADING);
+				ScreenManager.getInstance().show(Screens.EDITOR_NEW_LEVEL);
 				super.clicked(event, x, y);
 			}
 			
 		});
+		bt.setPosition(200, 300);
 		stage.addActor(bt);
 		
-		bt = new TextButton("Editor", GM.skin);
-		bt.setPosition(200, 160);
+		bt = new TextButton("Load level", GM.skin);
 		bt.addListener(new ClickListener(){
 
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				ScreenManager.getInstance().show(fr.alex.games.screens.Screens.EDITOR_MENU);
+				ScreenManager.getInstance().show(Screens.EDITOR_LOAD_LEVEL);
 				super.clicked(event, x, y);
 			}
 			
 		});
+		bt.setPosition(200, 200);
 		stage.addActor(bt);
 	}
 	
@@ -82,5 +84,4 @@ public class MainMenuScreen implements Screen{
 		// TODO Auto-generated method stub
 		
 	}
-
 }

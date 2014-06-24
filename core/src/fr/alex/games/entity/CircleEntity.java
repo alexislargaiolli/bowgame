@@ -4,13 +4,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.utils.Json;
 
 import fr.alex.games.Utils;
+import fr.alex.games.json.JsonCircleEntity;
 
 public abstract class CircleEntity extends PhysicEntity {
 
@@ -54,6 +54,17 @@ public abstract class CircleEntity extends PhysicEntity {
 	
 	public float getBoxRadius(){
 		return Utils.toBox(radius);
+	}
+	
+	public JsonCircleEntity toJsonEntity() {
+		JsonCircleEntity e = new JsonCircleEntity();
+		e.x = Utils.toWorld(body.getPosition().x);
+		e.y = Utils.toWorld(body.getPosition().y);				
+		e.density = fixture.getDensity();
+		e.friction = fixture.getFriction();
+		e.resitution = fixture.getRestitution();
+		e.radius = radius;
+		return e;
 	}
 	
 }

@@ -4,6 +4,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import fr.alex.games.json.JsonEntity;
+
 public class SpriteEntity extends Entity {
 
 	protected Sprite sprite;
@@ -14,7 +16,7 @@ public class SpriteEntity extends Entity {
 
 	@Override
 	public void update(float delta) {
-		
+
 	}
 
 	@Override
@@ -28,6 +30,12 @@ public class SpriteEntity extends Entity {
 
 	public void setSprite(Sprite sprite) {
 		this.sprite = sprite;
+	}
+
+	@Override
+	public JsonEntity toJsonEntity() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -26,7 +26,7 @@ public final class ScreenManager {
         this.game = game;
     }
  
-    public void show(Screen screen) {
+    public void show(Screens screen) {
         if (null == game) return;
         if (!screens.containsKey(screen.ordinal())) {
             screens.put(screen.ordinal(), screen.getScreenInstance());
@@ -34,7 +34,7 @@ public final class ScreenManager {
         game.setScreen(screens.get(screen.ordinal()));
     }
  
-    public void dispose(Screen screen) {
+    public void dispose(Screens screen) {
         if (!screens.containsKey(screen.ordinal())) return;
         screens.remove(screen.ordinal()).dispose();
     }

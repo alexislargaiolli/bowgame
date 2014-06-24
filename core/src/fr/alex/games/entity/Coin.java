@@ -2,6 +2,8 @@ package fr.alex.games.entity;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
+import fr.alex.games.json.JsonCircleEntity;
+
 public class Coin extends CircleEntity{
 
 	public Coin(float x, float y, TextureRegion textureRegion) {
@@ -14,4 +16,10 @@ public class Coin extends CircleEntity{
 		
 	}
 
+	public JsonCircleEntity toJsonEntity() {
+		JsonCircleEntity e = super.toJsonEntity();
+		e.type = "coin";
+		return e;
+	}
+	
 }
